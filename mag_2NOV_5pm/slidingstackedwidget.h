@@ -19,6 +19,8 @@ public:
             AUTOMATIC
     };
 
+//    int insertWidget(int index, QWidget *widget);
+
     //! The Constructor and Destructor
     SlidingStackedWidget(QWidget *parent);
 //    ~SlidingStackedWidget(void);

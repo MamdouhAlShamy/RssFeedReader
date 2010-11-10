@@ -174,3 +174,8 @@ void SlidingStackedWidget::animationDoneSlot(void) {
 }
 
 //void SlidingStackedWidget::insertWidget()
+//int QStackedWidget::insertWidget(int index, QWidget *widget)
+//{
+//   qDebug("here");
+
+//}

@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 //#include"item.h"
+#include"QDebug"
 
 //Nour try
 
@@ -137,8 +138,10 @@ void MainWindow::communicateWithWeb()
     QWebSettings::globalSettings()->setAttribute(QWebSettings::PluginsEnabled, true);
     QWebSettings::globalSettings()->setAttribute(QWebSettings::AutoLoadImages, true);
 
-    url="http://scobleizer.com/feed/";
+//    url="http://scobleizer.com/feed/";
     //    url="http://androidforums.com/external.php?type=RSS2";
+//    url="http://ee2010.us/forums/index.php?/rss/blog/";
+    url="http://feeds.feedburner.com/HowWebStuffWorks";
 
     mgr=new QNetworkAccessManager(this);
     req.setUrl(url);
@@ -172,7 +175,7 @@ void MainWindow::rss_render()
     }
 
     //Nour try
-    for(int i=0;i<count;i++)
+    for(int i=0;i<=count;i++)
     {
         //make objects for items
         ItemWidget *new_item=new ItemWidget(sstacked_widget);
@@ -242,6 +245,9 @@ void MainWindow::rss_render()
                         break;
                     }
                 }
+                //setTopicBody f
+                new_item_pointer[i]->setTopicBody();
+                qDebug()<<new_item_pointer[i]->description;
                 i++;
             }
         }
@@ -329,7 +335,7 @@ void MainWindow::drawWidget(int i)
     //    nm=new ItemWidget(sstacked_widget,list);
 
     //set itemWidget Widget in slidingStackedWidget
-    sstacked_widget->insertWidget(i,nm);
+//    sstacked_widget->insertWidget(i,nm);
 
     //show
     //    nm->show();
@@ -354,14 +360,27 @@ void MainWindow::full_screen(QListWidgetItem* list_item)
 {
     //    new_item_pointer[list->currentIndex().row()].setTopicBody();
     //    new_item_pointer[1].show();
-    new_item_pointer[list->currentIndex().row()]->setTopicBody();
-//    new_item_pointer[list->currentIndex().row()]->show();
 
-    sstacked_widget->insertWidget(list->currentIndex().row(),new_item_pointer[list->currentIndex().row()]);
+//    new_item_pointer[list->currentIndex().row()]->show();
 
 //    //setTopicBody for clicked topic
 //    list_of_itemsWidget[list->currentIndex().row()]->setTopicBody();
 //    //show it
 //    list_of_itemsWidget[list->currentIndex().row()]->show();
+
+    //set Topic Body
+//    new_item_pointer[list->currentIndex().row()]->setTopicBody();
+
+    int clicked_on_row_no=list->currentIndex().row();
+    qDebug()<<"u clicked on item no : "<<clicked_on_row_no;
+
+    new_item_pointer[clicked_on_row_no]->whereIam(clicked_on_row_no);
+
+    //put it in Stacked Widget
+    sstacked_widget->insertWidget(clicked_on_row_no+1,new_item_pointer[clicked_on_row_no]);
+
+    new_item_pointer[clicked_on_row_no]->setItemWidgetPointer(new_item_pointer);
+
+    qDebug()<<sstacked_widget->count();
 
 }

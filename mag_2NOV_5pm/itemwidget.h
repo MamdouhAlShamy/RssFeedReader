@@ -23,14 +23,23 @@ public:
     QString title, description, pub_date;
 
     QUrl *link;
-    QList<ItemWidget*>m_list;
+//    QList<ItemWidget*>m_list;
+
+    ItemWidget *item_widget_pointer;
+
+    int Here;
+    SlidingStackedWidget *s_Stacked_Widget;
 
     //Func
     void getHtml(QString html);
 
     void setTopicBody();
+    void mousePressEvent(QMouseEvent *event);
 
-    void setItemWidgetList(QList<ItemWidget*>);
+//    void setItemWidgetList(QList<ItemWidget*>);
+    void setItemWidgetPointer(ItemWidget *[]);
+    //made to know the order of item in the LIST
+    void whereIam(int);
 
 private:
     Ui::ItemWidget *ui;
